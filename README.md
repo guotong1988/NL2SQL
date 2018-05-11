@@ -4,15 +4,15 @@ This repo provides an implementation of our neural networks for predicting SQL q
 
 ## Citation
 
-> Tong Guo, Huilin Gao. 2018. SQLNet: Generating Structured Queries from Natural Language Without Reinforcement Learning.
+> Tong Guo, Huilin Gao. 2018. Bidirectional Attention for SQL Generation.
 
 ## Bibtex
 
 ```
-@article{guo2018,
-  title={SQLNet: Generating Structured Queries From Natural Language Without Reinforcement Learning},
+@article{guo2018bidirectional,
+  title={Bidirectional Attention for SQL Generation},
   author={Guo, Tong and Gao, Huilin},
-  journal={arXiv preprint arXiv:1711.04436},
+  journal={arXiv preprint arXiv:1801.00076},
   year={2018}
 }
 ```
