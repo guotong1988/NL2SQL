@@ -55,7 +55,7 @@ if __name__ == '__main__':
                 trainable_emb = args.train_emb)
         assert not args.train_emb, "Seq2SQL can\'t train embedding."
     else:
-        model = SQLNet(word_emb, N_word=N_word, use_ca=args.ca,
+        model = SQLNet(word_emb, char_emb,N_word=N_word, use_ca=args.ca,
                 gpu=GPU, trainable_emb = args.train_emb)
         assert not args.rl, "SQLNet can\'t do reinforcement learning."
     optimizer = torch.optim.Adam(model.parameters(),
