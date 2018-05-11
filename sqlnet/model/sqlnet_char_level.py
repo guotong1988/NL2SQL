@@ -4,14 +4,14 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
 import numpy as np
-from modules.word_embedding import WordEmbedding
+from modules.char_level_word_embedding import WordEmbedding
 from modules.aggregator_predict import AggPredictor
 from modules.selection_predict import SelPredictor
-from modules.sqlnet_condition_predict import SQLNetCondPredictor
+from modules.biattention_condition_predict import SQLNetCondPredictor
 
 
 class SQLNet(nn.Module):
-    def __init__(self, word_emb, N_word, N_h=100, N_depth=2,
+    def __init__(self, word_emb, char_emb, N_word, N_h=100, N_depth=2,
             gpu=False, use_ca=True, trainable_emb=False):
         super(SQLNet, self).__init__()
         self.use_ca = use_ca
@@ -29,25 +29,25 @@ class SQLNet(nn.Module):
 
         #Word embedding
         if trainable_emb:
-            self.agg_embed_layer = WordEmbedding(word_emb,None, N_word, gpu,
+            self.agg_embed_layer = WordEmbedding(word_emb, char_emb, N_word, gpu,
                     self.SQL_TOK, our_model=True, trainable=False)
-            self.sel_embed_layer = WordEmbedding(word_emb,char_emb, N_word, gpu,
+            self.sel_embed_layer = WordEmbedding(word_emb, char_emb, N_word, gpu,
                     self.SQL_TOK, our_model=True, trainable=False)
-            self.cond_embed_layer = WordEmbedding(word_emb,None,N_word, gpu,
+            self.cond_embed_layer = WordEmbedding(word_emb,char_emb,N_word, gpu,
                     self.SQL_TOK, our_model=True, trainable=False)
         else:
-            self.embed_layer = WordEmbedding(word_emb, None, N_word, gpu,
+            self.embed_layer = WordEmbedding(word_emb, char_emb, N_word, gpu,
                     self.SQL_TOK, our_model=True, trainable=trainable_emb)
         
         #Predict aggregator
-        self.agg_pred = AggPredictor(N_word, N_h, N_depth, use_ca=use_ca)
+        self.agg_pred = AggPredictor(N_word*2, N_h, N_depth, use_ca=use_ca)
 
         #Predict selected column
         self.sel_pred = SelPredictor(N_word*2, N_h, N_depth,
                 self.max_tok_num, use_ca=use_ca)
 
         #Predict number of cond
-        self.cond_pred = SQLNetCondPredictor(N_word, N_h, N_depth,
+        self.cond_pred = SQLNetCondPredictor(N_word*2, N_h, N_depth,
                 self.max_col_num, self.max_tok_num, use_ca, gpu)
 
 
