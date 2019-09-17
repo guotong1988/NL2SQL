@@ -1,7 +1,6 @@
 # Natural Language to SQL
 
-This repo provides an implementation of our neural networks for predicting SQL queries on [WikiSQL dataset](https://github.com/salesforce/WikiSQL). Our paper is available at [here](https://arxiv.org/abs/1801.00076).
-
+https://arxiv.org/abs/1801.00076
 
 ## Installation
 The data is in `data.tar.bz2`. Unzip the code by running
