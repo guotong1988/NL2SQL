@@ -2,20 +2,6 @@
 
 This repo provides an implementation of our neural networks for predicting SQL queries on [WikiSQL dataset](https://github.com/salesforce/WikiSQL). Our paper is available at [here](https://arxiv.org/abs/1801.00076).
 
-## Citation
-
-> Tong Guo, Huilin Gao. 2018. Bidirectional Attention for SQL Generation.
-
-## Bibtex
-
-```
-@article{guo2018bidirectional,
-  title={Bidirectional Attention for SQL Generation},
-  author={Guo, Tong and Gao, Huilin},
-  journal={arXiv preprint arXiv:1801.00076},
-  year={2018}
-}
-```
 
 ## Installation
 The data is in `data.tar.bz2`. Unzip the code by running
